@@ -21,8 +21,8 @@ const letterEl = document.querySelectorAll(".letter");
 let scores = [0, 0];
 let activePlayer = 0;
 let randomWord = "";
-let guessedWords = [];
-let displayedWords = [];
+let guessedLetters = [];
+let displayedLetters = [];
 
 diceEl.classList.add("hidden");
 lettersEl.classList.add("hidden");
@@ -144,12 +144,16 @@ const switchPlayer = function () {
   player1El.classList.toggle("player--active");
 };
 
+const getRandomWord = function () {
+  return words[Math.trunc(Math.random() * 100)];
+};
+
 const enterGameState = function () {
   btnRoll.classList.add("hidden");
   diceEl.classList.add("hidden");
   inputContainerEl.classList.remove("hidden");
   lettersEl.classList.remove("hidden");
-  randomWord = words[Math.trunc(Math.random() * 100)];
+  randomWord = getRandomWord();
   console.log(randomWord);
   scores = [0, 0];
   score0El.textContent = scores[0];
@@ -198,10 +202,12 @@ inputEl.addEventListener("keydown", function (e) {
 
   if (e.key === "Enter") {
     for (let i = 0; i < randomWord.length; i++) {
+      //CHECK GUESSED LETTER
       if (
         randomWord[i] === inputEl.value.toLowerCase() &&
-        guessedWords.indexOf(inputEl.value.toLowerCase()) === -1
+        guessedLetters.indexOf(inputEl.value.toLowerCase()) === -1
       ) {
+        // SHOW LETTER AND UPDATE SCORE
         document.querySelector(`.letter--${i}`).textContent = randomWord[i];
         document.querySelector(`.letter--${i}`).style.backgroundColor =
           "#2ECC71";
@@ -209,28 +215,28 @@ inputEl.addEventListener("keydown", function (e) {
         document.getElementById(`score--${activePlayer}`).textContent =
           `${scores[activePlayer]}`;
         correctAnswers += 1;
-        displayedWords.push(inputEl.value.toLowerCase());
+        displayedLetters.push(inputEl.value.toLowerCase());
       }
     }
 
-    guessedWords.push(inputEl.value.toLowerCase());
-    console.log(guessedWords);
-    console.log(displayedWords);
+    guessedLetters.push(inputEl.value.toLowerCase());
 
     if (!correctAnswers) switchPlayer();
     inputEl.value = "";
 
-    if (displayedWords.length === randomWord.length) {
-      randomWord = words[Math.trunc(Math.random() * 100)];
+    // RESET FOR NEW WORD
+    if (displayedLetters.length === randomWord.length) {
+      randomWord = getRandomWord();
       for (let i = 0; i < letterEl.length; i++) {
         letterEl[i].textContent = "?";
         letterEl[i].style.backgroundColor = "#f7f7f7";
-        guessedWords = [];
-        displayedWords = [];
+        guessedLetters = [];
+        displayedLetters = [];
       }
       console.log(randomWord);
     }
 
+    // CHECK AND DISPLAY WINNER
     if (scores[0] === 100 || scores[1] === 100) {
       inputContainerEl.classList.add("hidden");
       lettersEl.classList.add("hidden");
