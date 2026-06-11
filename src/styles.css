@@ -105,6 +105,7 @@ img {
   top: 30%;
   left: 50%;
   transform: translate(-50%, 0);
+  font-size: 2rem;
 }
 
 .input-container {
@@ -149,4 +150,8 @@ img {
 
 .player--active {
   background-color: #7da9f1;
+}
+
+.winner {
+  background-color: #ffd700;
 }

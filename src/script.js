@@ -5,6 +5,8 @@ const player0El = document.querySelector(".player--0");
 const player1El = document.querySelector(".player--1");
 const name0El = document.querySelector(`.name--0`);
 const name1El = document.querySelector(`.name--1`);
+const scoreLabel0El = document.querySelector(".score-label--0");
+const scoreLabel1El = document.querySelector(".score-label--1");
 const score0El = document.getElementById("score--0");
 const score1El = document.getElementById("score--1");
 
@@ -229,8 +231,20 @@ inputEl.addEventListener("keydown", function (e) {
       console.log(randomWord);
     }
 
-    if (scores[0] === 10 || scores[1] === 10) {
-      console.log("You win");
+    if (scores[0] === 100 || scores[1] === 100) {
+      inputContainerEl.classList.add("hidden");
+      lettersEl.classList.add("hidden");
+      if (scores[0] === 100) {
+        player0El.classList.remove("player--active");
+        player0El.classList.add("winner");
+        scoreLabel0El.textContent = "You win 🥳🎉";
+        scoreLabel0El.style.fontSize = `2.4rem`;
+      } else {
+        player1El.classList.remove("player--active");
+        player1El.classList.add("winner");
+        scoreLabel1El.textContent = "You win 🥳🎉";
+        scoreLabel1El.style.fontSize = `2.4rem`;
+      }
     }
   }
 });
