@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A competitive two-player word guessing game. Take turns guessing hidden 7 letter words and be the first to reach 100 points."
+    />
+    <link rel="stylesheet" href="src/styles.css" type="text/css" />
+    <title>Word Duel – Two-Player Word Guessing Game</title>
+  </head>
+  <body>
+    <main>
+      <section class="player player--0">
+        <h2 class="name name--0">PLAYER 1</h2>
+        <div class="score-container">
+          <p class="score-label">SCORE:</p>
+          <p class="score" id="score--0">32</p>
+        </div>
+      </section>
+
+      <section class="player player--1">
+        <h2 class="name name--1">PLAYER 2</h2>
+        <div class="score-container">
+          <p class="score-label">SCORE:</p>
+          <p class="score" id="score--1">108</p>
+        </div>
+      </section>
+
+      <img src="./images/dice-5.png" alt="Playing dice" class="dice" />
+      <div class="letters">
+        <span class="letter letter--0">h</span>
+        <span class="letter letter--1">e</span>
+        <span class="letter letter--2">l</span>
+        <span class="letter letter--3">l</span>
+        <span class="letter letter--4">o</span>
+      </div>
+
+      <div class="input-container">
+        <p class="input-label">
+          Please enter your desired letter and press Enter:
+        </p>
+        <input class="input" type="text" />
+      </div>
+
+      <button class="btn btn--roll">🎲 ROLL DICE</button>
+      <button class="btn btn--new">🔄 NEW GAME</button>
+    </main>
+
+    <script src="./src/script.js"></script>
+  </body>
+</html>
