@@ -17,23 +17,10 @@ const inputContainerEl = document.querySelector(".input-container");
 const inputEl = document.querySelector(".input");
 const letterEl = document.querySelectorAll(".letter");
 
-// STARTING CONDITION
-let scores = [0, 0];
-let activePlayer = 0;
-let randomWord = "";
-let guessedLetters = [];
-let displayedLetters = [];
+const btnReset = document.querySelector(".btn--reset");
 
-diceEl.classList.add("hidden");
-lettersEl.classList.add("hidden");
-inputContainerEl.classList.add("hidden");
-score0El.textContent = scores[0];
-score1El.textContent = scores[1];
-player0El.classList.add("player--active");
-player1El.classList.remove("player--active");
-for (let i = 0; i < letterEl.length; i++) {
-  letterEl[i].textContent = "?";
-}
+// STARTING CONDITION
+let scores, activePlayer, randomWord, guessedLetters, displayedLetters;
 
 const words = [
   "table",
@@ -138,6 +125,36 @@ const words = [
   "grass",
 ];
 
+const resetGame = function () {
+  scores = [0, 0];
+  activePlayer = 0;
+  randomWord = "";
+  guessedLetters = [];
+  displayedLetters = [];
+
+  diceEl.classList.add("hidden");
+  lettersEl.classList.add("hidden");
+  btnRoll.classList.remove("hidden");
+  inputContainerEl.classList.add("hidden");
+  player0El.classList.add("player--active");
+  player1El.classList.remove("player--active");
+  player0El.classList.remove(`winner`);
+  player1El.classList.remove(`winner`);
+
+  inputEl.value = "";
+  score0El.textContent = scores[0];
+  scoreLabel0El.textContent = "SCORE";
+  scoreLabel0El.style.fontSize = "1.2rem";
+  score1El.textContent = scores[1];
+  scoreLabel1El.textContent = "SCORE";
+  scoreLabel1El.style.fontSize = "1.2rem";
+  for (let i = 0; i < letterEl.length; i++) {
+    letterEl[i].textContent = "?";
+    letterEl[i].style.backgroundColor = `#f7f7f7`;
+  }
+};
+resetGame();
+
 const switchPlayer = function () {
   activePlayer = activePlayer === 0 ? 1 : 0;
   player0El.classList.toggle("player--active");
@@ -208,9 +225,8 @@ inputEl.addEventListener("keydown", function (e) {
         guessedLetters.indexOf(inputEl.value.toLowerCase()) === -1
       ) {
         // SHOW LETTER AND UPDATE SCORE
-        document.querySelector(`.letter--${i}`).textContent = randomWord[i];
-        document.querySelector(`.letter--${i}`).style.backgroundColor =
-          "#2ECC71";
+        letterEl[i].textContent = randomWord[i];
+        letterEl[i].style.backgroundColor = "#2ECC71";
         scores[activePlayer] += 5;
         document.getElementById(`score--${activePlayer}`).textContent =
           `${scores[activePlayer]}`;
@@ -254,3 +270,5 @@ inputEl.addEventListener("keydown", function (e) {
     }
   }
 });
+
+btnReset.addEventListener("click", resetGame);
