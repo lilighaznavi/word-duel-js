@@ -21,7 +21,7 @@ const btnReset = document.querySelector(".btn--reset");
 
 // STARTING CONDITION
 let scores, activePlayer, randomWord, guessedLetters, displayedLetters;
-
+const winScore = 100;
 const words = [
   "table",
   "chair",
@@ -253,10 +253,10 @@ inputEl.addEventListener("keydown", function (e) {
     }
 
     // CHECK AND DISPLAY WINNER
-    if (scores[0] === 100 || scores[1] === 100) {
+    if (scores[0] === winScore || scores[1] === winScore) {
       inputContainerEl.classList.add("hidden");
       lettersEl.classList.add("hidden");
-      if (scores[0] === 100) {
+      if (scores[0] === winScore) {
         player0El.classList.remove("player--active");
         player0El.classList.add("winner");
         scoreLabel0El.textContent = "You win 🥳🎉";
