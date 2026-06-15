@@ -162,7 +162,8 @@ const switchPlayer = function () {
 };
 
 const getRandomWord = function () {
-  return words[Math.trunc(Math.random() * 100)];
+  const index = Math.floor(Math.random() * words.length);
+  return words[index];
 };
 
 const enterGameState = function () {
@@ -243,7 +244,7 @@ inputEl.addEventListener("keydown", function (e) {
     // RESET FOR NEW WORD
     if (displayedLetters.length === randomWord.length) {
       randomWord = getRandomWord();
-      for (let i = 0; i < letterEl.length; i++) {
+      for (let i = 0; i < randomWord.length; i++) {
         letterEl[i].textContent = "?";
         letterEl[i].style.backgroundColor = "#f7f7f7";
         guessedLetters = [];
